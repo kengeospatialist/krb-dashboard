@@ -1,0 +1,78 @@
+/*!
+ *   KRB
+ *   Author: KRB
+ */
+ :root{
+     --krb-green: #2baf2b;
+     --krb-yellow:#F9CE2C;
+     --krb-white:#FFF;
+     --krb-black:#000000;
+ }
+
+ /*BACKGROUNDS*/
+ .krb-bg-green{
+    background-color: var(--krb-green) !important;
+    border-color: var(--krb-green) !important;
+ }
+
+ .krb-bg-yellow{
+    background-color: var(--krb-yellow) !important;
+    border-color: var(--krb-yellow) !important;
+ }
+
+ .krb-bg-white{
+    background-color: var(--krb-white) !important;
+    border-color: var(--krb-white) !important;
+ }
+ .krb-bg-black{
+    background-color: var(--krb-black) !important;
+    border-color: var(--krb-black) !important;
+ }
+
+ /*TEXT*/
+ .krb-text-white{
+    color: var(--krb-white);
+ }
+
+ .krb-text-green{
+    color: var(--krb-green);
+ }
+
+ .krb-text-yellow{
+    color: var(--krb-yellow);
+ }
+
+ .krb-text-black{
+    color: var(--krb-black);
+ }
+
+ /*placeholder*/
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--krb-white);
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--krb-white);
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--krb-white);
+  }
+
+ /*BORDERS*/
+ .krb-border-white{
+    border: 1px solid var(--krb-white) !important;
+ }
+
+ .krb-border-green{
+    border: 1px solid var(--krb-green) !important;
+ }
+
+ .krb-border-yellow{
+    border: 1px solid var(--krb-yellow) !important;
+ }
+
+ .krb-border-black{
+    border: 1px solid var(--krb-black) !important;
+ }

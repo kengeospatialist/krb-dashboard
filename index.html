@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en" style="height: auto;">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KRB</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+  <!--Leaflet-->
+  <link rel="stylesheet" href="plugins/leaflet/leaflet/leaflet.css">
+
+  <!--K CSS-->
+  <link rel="stylesheet" href="css/k.css">
+
+  <!--KRB CSS-->
+  <link rel="stylesheet" href="dist/css/krbcss.css">
+  <style type="text/css">
+    /* Chart.js */
+    @keyframes chartjs-render-animation {
+      from {
+        opacity: .99
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .chartjs-render-monitor {
+      animation: chartjs-render-animation 1ms
+    }
+
+    .chartjs-size-monitor,
+    .chartjs-size-monitor-expand,
+    .chartjs-size-monitor-shrink {
+      position: absolute;
+      direction: ltr;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+      visibility: hidden;
+      z-index: -1
+    }
+
+    .chartjs-size-monitor-expand>div {
+      position: absolute;
+      width: 1000000px;
+      height: 1000000px;
+      left: 0;
+      top: 0
+    }
+
+    .chartjs-size-monitor-shrink>div {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      left: 0;
+      top: 0
+    }
+  </style>
+</head>
+
+<body
+  class="dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-closed sidebar-collapse"
+  style="height: auto;">
+  <div class="wrapper">
+
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center" style="height: 0px;">
+      <img class="animation__wobble" src="dist/img/krb-logo.png" alt="KRB Logo" height="60" width="60"
+        style="display: none;">
+    </div>
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-dark krb-bg-green krb-text-white">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="index.html" class="nav-link">Dashboard</a>
+        </li>
+      </ul>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto ">
+        <!-- Navbar Search -->
+        <li class="nav-item">
+          <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+            <i class="fas fa-search"></i>
+          </a>
+          <div class="navbar-search-block">
+            <form class="form-inline">
+              <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        <!-- Notifications Dropdown Menu 
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-danger navbar-badge">
+              1
+            </span>
+          </a>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4 krb-bg-green krb-text-white">
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-link krb-bg-green krb-text-white">
+        <img src="dist/img/krb-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3">
+        <span class="brand-text font-weight-light">KRB</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div
+        class="sidebar os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition os-host-scrollbar-vertical-hidden">
+        <div class="os-resize-observer-host observed">
+          <div class="os-resize-observer" style="left: 0px; right: auto;"></div>
+        </div>
+        <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
+          <div class="os-resize-observer"></div>
+        </div>
+        <div class="os-content-glue" style="margin: 0px -8px; width: 249px; height: 622px;"></div>
+        <div class="os-padding">
+          <div class="os-viewport os-viewport-native-scrollbars-invisible">
+            <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
+              <!-- SidebarSearch Form -->
+              <div class="form-inline pt-2">
+                <div class="input-group" data-widget="sidebar-search">
+                  <input class="form-control form-control-sidebar krb-bg-green krb-text-white krb-border-white"
+                    type="search" placeholder="Search" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-sidebar  krb-bg-green krb-border-white">
+                      <i class="fas fa-search fa-fw"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="sidebar-search-results ">
+                  <div class="list-group "><a href="#" class="list-group-item k-bg-green-3 krb-text-white">
+                      <div class="search-title"><strong class="text-light"></strong>N<strong
+                          class="text-light"></strong>o<strong class="text-light"></strong> <strong
+                          class="text-light"></strong>e<strong class="text-light"></strong>l<strong
+                          class="text-light"></strong>e<strong class="text-light"></strong>m<strong
+                          class="text-light"></strong>e<strong class="text-light"></strong>n<strong
+                          class="text-light"></strong>t<strong class="text-light"></strong> <strong
+                          class="text-light"></strong>f<strong class="text-light"></strong>o<strong
+                          class="text-light"></strong>u<strong class="text-light"></strong>n<strong
+                          class="text-light"></strong>d<strong class="text-light"></strong>!<strong
+                          class="text-light"></strong></div>
+                      <div class="search-path"></div>
+                    </a></div>
+                </div>
+              </div>
+
+              <!-- Sidebar Menu -->
+              <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                  data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                  <li class="nav-item menu-open">
+                    <a href="index.html" class="nav-link active">
+                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                      <p>
+                        Dashboard
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="developmet.html" class="nav-link">
+                      <i class="nav-icon fas fa-road"></i>
+                      <p>
+                        Development
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- /.sidebar-menu -->
+            </div>
+          </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden">
+          <div class="os-scrollbar-track">
+            <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
+          </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable os-scrollbar-auto-hidden">
+          <div class="os-scrollbar-track">
+            <div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div>
+          </div>
+        </div>
+        <div class="os-scrollbar-corner"></div>
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper k-bg-gray-3" style="min-height: 679.917px;">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h3 class="m-0 krb-text-black">Garissa County at a Glance</h3>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item krb-text-yellow"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active krb-text-green">Dashboard</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Info boxes -->
+          <div class="row">
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box mb3 k-bg-teal-8 elevation-2">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-road"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total</span>
+                  <span class="info-box-number">
+                    3102.38 KM
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box mb-3 k-bg-teal-8 elevation-2">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-road"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Paved</span>
+                  <span class="info-box-number">37.86 KM</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box mb-3 k-bg-teal-8 elevation-2">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-road"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Unpaved</span>
+                  <span class="info-box-number">3064.52 KM</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header k-bg-gray-2">
+                  <h5 class="card-title krb-text-black">GRIASSA COUNTY ROAD STATISTICS</h5>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <!--<button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>-->
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body krb-bg-white krb-text-black">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="text-center">
+                        <strong>Paved and Unpaved Roads Statistics in Kilometers(Km)</strong>
+                      </p>
+                      <div class="chart">
+                        <div class="chartjs-size-monitor">
+                          <div class="chartjs-size-monitor-expand">
+                            <div class=""></div>
+                          </div>
+                          <div class="chartjs-size-monitor-shrink">
+                            <div class=""></div>
+                          </div>
+                        </div>
+                        <canvas id="lineChart"
+                          style="min-height: 400px; height: 400px; max-height: 400px; max-width: 100%; display: block; width: 368px;"
+                          width="100%" height="400" class="chartjs-render-monitor"></canvas>
+                      </div>
+                      <p class="text-left small">
+                        click on legend (the red and green bars below title) to turn of dataset
+                      </p>
+                      <!-- /.chart-responsive -->
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- ./card-body -->
+                <div class="card-footer k-bg-gray-2 krb-text-black">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="description-block">
+                        <span class="description-text">KENYA ROADS BOARD</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- /.card-footer -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <!-- Main row -->
+          <div class="row">
+            <!-- Left col -->
+            <div class="col-md-7">
+              <!-- MAP & BOX PANE -->
+              <div class="card k-bg-gray-2">
+                <div class="card-header k-bg-gray-2 ">
+                  <h3 class="card-title krb-text-black" id="map-tile">GARISSA ROADS
+                  </h3>
+                  <div class="card-tools">
+                    <div class="btn-group show">
+                      <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"
+                        data-offset="-52" aria-expanded="true">
+                        <!--<i class="fas fa-bars"></i>-->
+                        Road Agency
+                      </button>
+                      <div class="dropdown-menu" id="filter-roads-agency" role="menu" x-placement="top-start"
+                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-52px, -133px, 0px);">
+                        <a href="#" class="dropdown-item" data-filter="">All Roads</a>
+                        <a href="#" class="dropdown-item" data-filter="KENHA">KENHA Roads</a>
+                        <a href="#" class="dropdown-item" data-filter="KeRRA">KeRRA Roads</a>
+                        <a href="#" class="dropdown-item" data-filter="KURA">KURA Roads</a>
+                        <a href="#" class="dropdown-item" data-filter="County">County
+                          Roads</a>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <!--<button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>-->
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0 k-bg-white krb-text-black">
+                  <div class="d-md-flex">
+                    <div class="p-0 flex-fill" style="overflow: hidden">
+                      <!-- Map will be created here -->
+                      <div id="map" style="min-height: 430px; height: 100%;" class="mapael">
+                      </div>
+                    </div>
+                  </div><!-- /.d-md-flex -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer p-1 k-bg-gray-2 krb-text-black mb-1">
+                  KRB
+                </div>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-md-5">
+              <div class="card">
+                <div class="card-header k-bg-gray-2 ">
+                  <h3 class="card-title krb-text-black" id="chart-tile">Pie Chart</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <!--<button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>-->
+                  </div>
+                </div>
+                <div class="card-body p-0 pt-1 k-bg-white krb-text-black">
+                  <div class="chartjs-size-monitor">
+                    <div class="chartjs-size-monitor-expand">
+                      <div class=""></div>
+                    </div>
+                    <div class="chartjs-size-monitor-shrink">
+                      <div class=""></div>
+                    </div>
+                  </div>
+                  <canvas id="pieChart"
+                    style="min-height: 180px; height: 180px; max-height: 180px; max-width: 100%; display: block;"
+                    width="80%" height="180" class="chartjs-render-monitor">
+                  </canvas>
+                  <div class="row m-1">
+                    <div class="col-4 k-bg-green text-white" id="pavedGood">Good</div>
+                    <div class="col-4 k-bg-yellow" id="pavedFair">Fair</div>
+                    <div class="col-4 k-bg-red text-white" id="pavedPoor">Poor</div>
+                  </div>
+                  <canvas id="pieChart2"
+                    style="min-height: 180px; height: 180px; max-height: 180px; max-width: 100%; display: block;"
+                    width="80%" height="180" class="chartjs-render-monitor">
+                  </canvas>
+                  <div class="row m-1">
+                    <div class="col-4 k-bg-green text-white" id="unpavedGood">Good</div>
+                    <div class="col-4 k-bg-yellow" id="unpavedFair">Fair</div>
+                    <div class="col-4 k-bg-red text-white" id="unpavedPoor">Poor</div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!--/. container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <footer class="main-footer krb-bg-green elevation-1">
+      <strong>KRB</strong>
+    </footer>
+    <div id="sidebar-overlay"></div>
+
+    <!-- MODALS -->
+    <div id="modal-road-details" class="k-modal">
+      <div class="k-modal-content">
+        <div class="k-modal-content-header">
+          <h5 class="krb-text-black">ROAD DETAILS</h5>
+          <span class="k-modal-close">X</span>
+        </div>
+        <div class="k-modal-content-body" id="modal-road-content" style="min-height: 50px;">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars 
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>-->
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.js"></script>
+
+  <!-- PAGE PLUGINS -->
+  <!-- jQuery Mapael -->
+  <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <!-- ChartJS -->
+  <script src="plugins/chart.js/Chart.min.js"></script>
+  <!--Leaflet-->
+  <script src="plugins/leaflet/leaflet/leaflet.js"></script>
+
+  <!--Vector GRID-->
+  <script type="text/javascript" src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
+
+  <!--Leaflet-->
+  <script src="data/roads.js"></script>
+
+  <script>
+    var mapTitle = $("#map-tile");
+    var chartTitle = $("#chart-tile");
+    var modalRdDetails = document.getElementById("modal-road-details");
+    var modalRdDetailsContent = document.getElementById("modal-road-content");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("k-modal-close")[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modalRdDetails.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modalRdDetails) {
+        modalRdDetails.style.display = "none";
+      }
+    }
+
+    //CHARTS
+
+    var areaChartDataset = {
+      labels: ['KeNHA', 'KURA', 'KeRRA', 'County'],
+      datasets: [
+        {
+          label: 'Paved',
+          backgroundColor: '#008000',
+          borderColor: 'rgba(255,0,0,0.8)',
+          pointRadius: false,
+          pointColor: '#3b8bba',
+          pointStrokeColor: 'rgba(255,0,0,1)',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(255,0,0,1)',
+          data: [ 24.7, 3.01, 3.66, 6.5]
+        },
+        {
+          label: 'Unpaved',
+          backgroundColor: '#F44336',
+          borderColor: 'rgba(255,255,0,1)',
+          pointRadius: false,
+          pointColor: 'rgba(255,255,0,1)',
+          pointStrokeColor: '#c1c7d1',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(255,255,0, 1)',
+          data: [905.33, 36.87, 483.57,  1638.74]
+        },
+      ]
+    }
+    
+    var stackedBarChartCanvas = $('#lineChart').get(0).getContext('2d')
+    var stackedBarChartData = $.extend(true, {}, areaChartDataset)
+
+    var stackedBarChartOptions = {
+      indexAxis: 'x',
+      responsive              : true,
+      maintainAspectRatio     : false,
+      scales: {
+        xAxes: [{
+          stacked: true,
+        }],
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    };
+
+    new Chart(stackedBarChartCanvas, {
+      type: 'bar',
+      data: stackedBarChartData,
+      options: stackedBarChartOptions
+    });
+
+
+    //CHARTS
+    // Get context with jQuery - using jQuery's .get() method.
+    var surTypeData = {
+      labels: [
+        'Good',
+        'Fair',
+        'Poor',
+      ],
+      datasets: [
+        {
+          data: [100, 200, 100],
+          backgroundColor: ['#008000', '#FFFF00', '#F44336'],
+        }
+      ]
+    }
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+    var pieChartCanvas2 = $('#pieChart2').get(0).getContext('2d');
+    var pieData = surTypeData;
+    var pieOptions = {
+      maintainAspectRatio: false,
+      responsive: true,
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: 'Paved Roads Surface Condition',
+      }
+    }
+    var pieChart = new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
+    });
+
+    var surTypeData2 = {
+      labels: [
+        'Good',
+        'Fair',
+        'Poor',
+      ],
+      datasets: [
+        {
+          data: [100, 200, 100],
+          backgroundColor: ['#008000', '#FFFF00', '#F44336'],
+        }
+      ]
+    }
+    var pieData2 = surTypeData2;
+    var pieOptions2 = {
+      maintainAspectRatio: false,
+      responsive: true,
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: 'Unaved Roads Surface Condition',
+      }
+    }
+    var pieChart2 = new Chart(pieChartCanvas2, {
+      type: 'pie',
+      data: pieData2,
+      options: pieOptions2
+    })
+
+
+    //MAPS
+    var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    });
+    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      opacity: 0.4,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    var CyclOSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+
+    var emptyBase = L.tileLayer('', {
+      attribution: 'KRB'
+    });
+
+    var map = L.map('map', {
+      center: [-0.476664, 40.238515],
+      zoom: 9,
+      layers: [OpenStreetMap_Mapnik],
+    });
+
+    var baseMaps = {
+      "No Base": emptyBase,
+      "OSM": OpenStreetMap_Mapnik,
+    };
+
+    var overlayMaps = {
+    };
+    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    var mapTypeInfo = "road classification";
+    function setStyleLine(properties, mapType) {
+
+      if (mapType == "road classification") {
+        var weight = 1;
+        var color = "#BBB";
+        var rd_class = properties.RdClass;
+        if (rd_class == "A") {
+          weight = 3;
+          color = "#FF0000";//Red
+        }
+        else if (rd_class == "Au") {
+          weight = 3;
+          color = "#DC143C";//Crimson
+        }
+        else if (rd_class == "B") {
+          weight = 2.5;
+          color = "#8B4513";//Saddle Brown
+        }
+        else if (rd_class == "Bu") {
+          weight = 2.5;
+          color = "#6A1B9A";//Peru
+        }
+        else if (rd_class == "C") {
+          weight = 2;
+          color = "#008000";//Green
+        }
+        else if (rd_class == "Cu") {
+          weight = 2;
+          color = "#32CD32";//Lime Green
+        }
+        else {
+          weight = 1.5;
+          color = "#808080";//Gray
+        }
+        var style = {
+          "weight": weight,
+          "opacity": 1,
+          "color": color,
+        };
+        return style;
+      }
+      else {
+        var weight = 1;
+        var color = "#BBB";
+        var rd_surf_cond = properties.CW_Surf_Co;
+        if (rd_surf_cond == "Good") {
+          weight = 2;
+          color = "#008000";
+        }
+        else if (rd_surf_cond == "Fair") {
+          weight = 2;
+          color = "#FFFF00";
+        }
+        else if (rd_surf_cond == "Poor") {
+          weight = 2;
+          color = "#FF0000";
+        }
+        else {
+          weight = 1;
+          color = "#616161";
+        }
+        var style = {
+          "weight": weight,
+          "opacity": 1,
+          "color": color,
+        };
+        return style;
+      }
+
+    }
+
+    function onEachFeature(feature, layer) {
+      //layer.bindPopup(feature.properties.RdClass);
+      layer.setStyle(setStyleLine(feature.properties, mapTypeInfo));
+      layer.on("click", function () {
+        modalRdDetails.style.display = "block";
+        modalRdDetailsContent.innerHTML = `
+          <div class="row">
+            <div class="col-4">Road Class</div><div class="col-8">${feature.properties.RdClass}</div>
+          </div>
+          <hr class="m-0 mt-1">
+          <div class="row">
+            <div class="col-4">Road Number</div><div class="col-8">${feature.properties.RdNum}</div>
+          </div>
+          <hr class="m-0 mt-1">
+          <div class="row">
+            <div class="col-4">Road Name</div><div class="col-8">${feature.properties.RdName}</div>
+          </div>
+          <hr class="m-0 mt-1">
+          <div class="row">
+            <div class="col-4">Road Surface</div><div class="col-8">${feature.properties.CW_Surf_Ty}</div>
+          </div>
+          <hr class="m-0 mt-1">
+          <div class="row">
+            <div class="col-4">Road Surface Condition</div><div class="col-8">${feature.properties.CW_Surf_Co}</div>
+          </div>
+        `
+      })
+    }
+    var datafilter = [""];
+    //Road Statistics
+    var featureCount = 0;
+    var totalLegth = 0;
+    var paved = 0;
+    var pavedGood = 0;
+    var pavedFair = 0;
+    var pavedPoor = 0;
+    var unpaved = 0;
+    var unpavedGood = 0;
+    var unpavedFair = 0;
+    var unpavedPoor = 0;
+
+    var roads = L.geoJSON(null, {
+      filter: function (feature, layer) {
+        var rd_agency = feature.properties.RdAgency;
+        var zoom = map.getZoom();
+        var rd_class = feature.properties.RdClass;
+        var major_rds = ["A", "B", "Bu", "C"];
+        var major_rds2 = ["A", "B", "Bu", "C", "D", "Du", "E", "Eu"];
+        if (datafilter[0] == '') {
+          if (zoom < 11 && major_rds.includes(rd_class)) {
+            return true;
+          } if (zoom < 14 && zoom >= 11 && major_rds2.includes(rd_class)) {
+            return true;
+          }
+          if (zoom >= 14) {
+            return true;
+          }
+        }
+        else {
+          if (zoom < 11 && major_rds.includes(rd_class) && datafilter.includes(rd_agency)) {
+            return true;
+          } if (zoom < 14 && zoom >= 11 && major_rds2.includes(rd_class) && datafilter.includes(rd_agency)) {
+            return true;
+          }
+          if (zoom >= 14 && datafilter.includes(rd_agency)) {
+            return true;
+          }
+        }
+
+      },
+      /*style: function (feature) {
+        //console.log(feature.properties.RdClass)
+        return setStyleLine(feature.properties.RdClass, mapTypeInfo);
+      },*/
+      onEachFeature: onEachFeature,
+    });
+
+    roads.addTo(map);
+    layerControl.addOverlay(roads, "Roads");
+
+    roads.addData(rddata);
+    getStatistics();
+
+    map.on("zoomend", function (e) {
+      redrawRoads()
+    });
+
+    $('#filter-roads-agency a').on("click", function (e) {
+      e.preventDefault();
+      var datatofilter = $(this).data("filter");
+      datafilter = datatofilter.split(",");
+      redrawRoads();
+      updateZoom();
+    });
+
+    function redrawRoads() {
+      roads.clearLayers();
+      resetStatistics();
+      roads.addData(rddata);
+      getStatistics();
+      //console.log(map.getZoom());
+    }
+
+    function resetStatistics() {
+      featureCount = 0;
+      totalLegth = 0;
+      paved = 0;
+      pavedGood = 0;
+      pavedFair = 0;
+      pavedPoor = 0;
+      unpaved = 0;
+      unpavedGood = 0;
+      unpavedFair = 0;
+      unpavedPoor = 0;
+    }
+
+    function getStatistics() {
+      for (let x in rddata.features) {
+        var properties = rddata.features[x].properties;
+        var rd_agency = properties.RdAgency;
+        if (datafilter[0] == '') {
+          updateStatistics(properties);
+        }
+        else {
+          if (datafilter.includes(rd_agency)) {
+            updateStatistics(properties);
+          }
+        }
+        featureCount++;
+      }
+      pieChart.data.datasets[0].data = [pavedGood.toFixed(2), pavedFair.toFixed(2), pavedPoor.toFixed(2)];
+      pieChart.update();
+      pieChart2.data.datasets[0].data = [unpavedGood.toFixed(2), unpavedFair.toFixed(2), unpavedPoor.toFixed(2)];
+      pieChart2.update();
+      updateTitles();
+      updatePieStats();
+      //map.fitBounds(roads.getBounds());
+    }
+
+    function updatePieStats() {
+      $("#pavedGood").html("Good<br/>" + pavedGood.toFixed(2) + " Km");
+      $("#pavedFair").html("Fair<br/>" + pavedFair.toFixed(2) + " Km");
+      $("#pavedPoor").html("Poor<br/>" + pavedPoor.toFixed(2) + " Km");
+      $("#unpavedGood").html("Good<br/>" + unpavedGood.toFixed(2) + " Km");
+      $("#unpavedFair").html("Fair<br/>" + unpavedFair.toFixed(2) + " Km");
+      $("#unpavedPoor").html("Poor<br/>" + unpavedPoor.toFixed(2) + " Km");
+    }
+
+    function updateStatistics(properties) {
+      totalLegth = totalLegth + properties.Rdlength;
+      if (properties.Surface_Ty == "Paved") {
+        paved = paved + properties.Rdlength;
+        if (properties.CW_Surf_Co == "Fair") {
+          pavedFair = pavedFair + properties.Rdlength;
+        }
+        if (properties.CW_Surf_Co == "Good") {
+          pavedGood = pavedGood + properties.Rdlength;
+        }
+        if (properties.CW_Surf_Co == "Poor") {
+          pavedPoor = pavedPoor + properties.Rdlength;
+        }
+      }
+      else {
+        unpaved = unpaved + properties.Rdlength;
+        if (properties.CW_Surf_Co == "Fair") {
+          unpavedFair = unpavedFair + properties.Rdlength;
+        }
+        if (properties.CW_Surf_Co == "Good") {
+          unpavedGood = unpavedGood + properties.Rdlength;
+        }
+        if (properties.CW_Surf_Co == "Poor") {
+          unpavedPoor = unpavedPoor + properties.Rdlength;
+        }
+      }
+    }
+
+    function updateTitles() {
+      if (datafilter[0] == '') {
+        mapTitle.html("GARISSA ROADS");
+        chartTitle.html("ROAD STATISTICS");
+      }
+      if (datafilter[0] == 'KENHA') {
+        mapTitle.html("KENHA ROADS");
+        chartTitle.html("KENHA ROAD STATISTICS");
+      }
+      if (datafilter[0] == 'KeRRA') {
+        mapTitle.html("KeRRA ROADS");
+        chartTitle.html("KeRRA ROAD STATISTICS");
+      }
+      if (datafilter[0] == 'KURA') {
+        mapTitle.html("KURA ROADS");
+        chartTitle.html("KURA ROAD STATISTICS");
+      }
+      if (datafilter[0] == 'County') {
+        mapTitle.html("COUNTY ROADS");
+        chartTitle.html("COUNTY ROAD STATISTICS");
+      }
+    }
+
+    function updateZoom() {
+      if (datafilter[0] != 'County') {
+        map.fitBounds(roads.getBounds());
+      }
+      else {
+        map.setZoom(14);
+        map.setView([-0.449222, 39.646225]);
+      }
+    }
+    /*var xx = 0; for (let x in rddata.features) {
+      console.log(x + ": " + rddata.features[x]);
+      xx = xx + rddata.features[x].properties.Rdlength;
+    }*/
+
+    //CUSTOM PLUGINS
+    //MAP CHANGING
+    L.Control.mapStyleKRB = L.Control.extend({
+      onAdd: function (map) {
+        var legendCard = L.DomUtil.create('div', '');
+        legendCard.innerHTML = `
+        <div class="card mb-0">
+          <div class="card-header k-bg-gray-2 p-1 rounded-0">
+            <h5 class="card-title krb-text-black" id="chart-tile">Legend</h5>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div id="legend-content" class="card-body p-1 pt-1 k-bg-white krb-text-black" style="display:none">
+            <h6 class="small">Map Type</h6>
+            <select class="form-select form-select-sm">
+              <option value="road classification" selected>Road Classification</option>
+              <option value="road condition">Road Condition</option>
+            </select>
+            <hr class="my-0 mt-1"/>
+            <div class="mt-1" style="width:150px">
+              <h5 class="small">Road Class</h5>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#FF0000"></div><div class="col-8">A</div>
+              </div>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#8B4513"></div><div class="col-8">B</div>
+              </div>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#008000"></div><div class="col-8">C</div>
+              </div>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#808080"></div><div class="col-8">County Roads</div>
+              </div>
+            </div>
+            <div class="mt-1 d-none" style="width:150px">
+              <h5 class="small">Road Condition</h5>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#008000"></div><div class="col-8">Good</div>
+              </div>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#FFFF00"></div><div class="col-8">Fair</div>
+              </div>
+              <div class="row m-0 align-items-center p-1">
+                <div class="col-4" style="height:2px; background-color:#FF0000"></div><div class="col-8">Poor</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        var iconColapes = legendCard.children[0].children[0].children[1].children[0];
+        window.onload = function () {
+          iconColapes.click();
+        };
+        var div = legendCard.children[0].children[1];
+        var mapTypeSelect = div.children[1];
+        var classificationLegend = div.children[3];
+        var conditionLegend = div.children[4];
+        mapTypeSelect.addEventListener('change', function () {
+          mapTypeInfo = mapTypeSelect.value;
+          //update legend 
+          if (mapTypeInfo == 'road classification') {
+            classificationLegend.classList.remove('d-none');
+            conditionLegend.classList.add('d-none');
+          }
+          else {
+            classificationLegend.classList.add('d-none');
+            conditionLegend.classList.remove('d-none');
+          }
+          //update map style
+          roads.eachLayer(function (layer) {
+            var properties = layer.feature.properties;
+            layer.setStyle(setStyleLine(properties, mapTypeInfo));
+          });
+        });
+
+        return legendCard;
+      },
+
+      onRemove: function (map) {
+        // Nothing to do here
+      }
+    });
+
+    L.control.mapStyleKRB = function (opts) {
+      return new L.Control.mapStyleKRB(opts);
+    }
+
+    L.control.mapStyleKRB({ position: 'bottomleft' }).addTo(map);
+  </script>
+</body>
+
+</html>
