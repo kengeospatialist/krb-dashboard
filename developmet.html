@@ -308,7 +308,7 @@
 
                 <div class="info-box-content">
                   <span class="info-box-text">Planned</span>
-                  <span class="info-box-number">129.37 KM</span>
+                  <span class="info-box-number">296.37 KM</span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -419,7 +419,7 @@
     <!-- /.content-wrapper -->
     <!-- Main Footer -->
     <footer class="main-footer krb-bg-green elevation-1">
-      <strong>KRB</strong>
+      <strong class="krb-text-white"><a href="https://krb.go.ke/" class="krb-text-white text-decoration-none">KENYA ROADS BOARD</a></strong>
     </footer>
     <div id="sidebar-overlay"></div>
 
@@ -685,13 +685,21 @@
       layer.setStyle(setStyleLine(feature.properties, mapTypeInfo));
       layer.on("click", function () {
         modalRdDetails.style.display = "block";
+        var rdclass =feature.properties.rdclass;
+        if(rdclass === null){
+          rdclass = "Unclassified";
+        }
+        var rdnum = feature.properties.rdnum;
+        if(rdnum === null){
+          rdnum = "";
+        }
         modalRdDetailsContent.innerHTML = `
           <div class="row">
-            <div class="col-4">Road Class</div><div class="col-8">${feature.properties.rdclass}</div>
+            <div class="col-4">Road Class</div><div class="col-8">${rdclass}</div>
           </div>
           <hr class="m-0 mt-1">
           <div class="row">
-            <div class="col-4">Road Number</div><div class="col-8">${feature.properties.rdnum}</div>
+            <div class="col-4">Road Number</div><div class="col-8">${rdnum}</div>
           </div>
           <hr class="m-0 mt-1">
           <div class="row">
